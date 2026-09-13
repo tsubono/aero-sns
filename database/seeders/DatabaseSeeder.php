@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
 
             // ダミー
-            ProductSeeder::class,
+            // ProductSeeder::class,
         ]);
     }
 }
