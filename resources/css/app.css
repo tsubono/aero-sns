@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        margin: 0;
+        background: #ffffff;
+    }
+    ::selection {
+        background: #1fa5c4;
+        color: #ffffff;
+    }
+    a {
+        color: #178ba6;
+    }
+    input::placeholder,
+    textarea::placeholder {
+        color: #a3adb9;
+    }
+}
+
+@layer utilities {
+    .aero-rail {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .aero-rail::-webkit-scrollbar {
+        display: none;
+    }
+    .aero-img-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: repeating-linear-gradient(135deg, rgba(31,165,196,0.09) 0 12px, rgba(31,165,196,0.04) 12px 24px);
+    }
+    .aero-img-placeholder-lg {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: repeating-linear-gradient(135deg, rgba(31,165,196,0.09) 0 14px, rgba(31,165,196,0.04) 14px 28px);
+    }
+    .aero-input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 13px 15px;
+        font-size: 14px;
+        font-family: inherit;
+        color: #1a1f27;
+        background: #ffffff;
+        border: 1px solid #d4dae1;
+        border-radius: 10px;
+        outline: none;
+    }
+    .aero-input:focus {
+        border-color: #1fa5c4;
+        box-shadow: 0 0 0 3px rgba(31,165,196,0.12);
+    }
+    .aero-input-search {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 13px 16px 13px 40px;
+        font-size: 14px;
+        font-family: inherit;
+        color: #1a1f27;
+        background: #ffffff;
+        border: 1px solid #d4dae1;
+        border-radius: 10px;
+        outline: none;
+    }
+    .aero-input-search:focus {
+        border-color: #1fa5c4;
+        box-shadow: 0 0 0 3px rgba(31,165,196,0.12);
+    }
+    .aero-textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 13px 15px;
+        font-size: 14px;
+        font-family: inherit;
+        line-height: 1.7;
+        color: #1a1f27;
+        background: #ffffff;
+        border: 1px solid #d4dae1;
+        border-radius: 10px;
+        outline: none;
+        resize: vertical;
+    }
+    .aero-textarea:focus {
+        border-color: #1fa5c4;
+        box-shadow: 0 0 0 3px rgba(31,165,196,0.12);
+    }
+}
