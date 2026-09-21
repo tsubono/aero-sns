@@ -111,7 +111,10 @@
             </div>
         </div>
 
-        <div id="charge-error" class="hidden mb-4 px-4 py-3 rounded-[10px] bg-[rgba(207,19,34,0.06)] border border-[rgba(207,19,34,0.2)] text-[14px] text-[#cf1322] font-semibold"></div>
+        <div id="charge-error" class="hidden mb-4 px-4 py-3 rounded-[10px] bg-[#cf1322] text-white text-[14px] font-semibold flex items-center gap-3">
+            <svg class="flex-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="charge-error-text"></span>
+        </div>
 
         <button type="submit" id="charge-btn" disabled
             class="w-full py-[15px] rounded-[10px] text-white text-[15px] font-bold text-center transition-colors duration-150 border-0 font-sans bg-[#c8d0d9] cursor-not-allowed">
@@ -303,7 +306,7 @@
         btn.textContent = 'ポイントをチャージする';
         btn.classList.remove('bg-[#c8d0d9]', 'cursor-not-allowed');
         btn.classList.add('bg-[#1fa5c4]', 'hover:bg-[#178ba6]', 'cursor-pointer');
-        errDiv.textContent = msg;
+        document.getElementById('charge-error-text').textContent = msg;
         errDiv.classList.remove('hidden');
     }
 </script>
