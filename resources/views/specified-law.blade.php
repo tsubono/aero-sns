@@ -6,8 +6,8 @@
             @foreach([
                 ['label' => '販売事業者名',       'value' => '吉本 隼司'],
                 ['label' => '代表者名',           'value' => '吉本 隼司'],
-                ['label' => '所在地',             'value' => '東京都練馬区桜台1-1-10-705'],
-                ['label' => '電話番号',           'value' => '090-7093-6328'],
+                ['label' => '所在地',             'value' => '請求があった場合、遅滞なく開示いたします'],
+                ['label' => '電話番号',           'value' => '請求があった場合、遅滞なく開示いたします'],
                 ['label' => 'メールアドレス',      'value' => 'aerosnsofficial@gmail.com'],
                 ['label' => 'サービス名',          'value' => 'AERO SNS'],
                 ['label' => '販売URL',            'value' => config('app.url')],
@@ -20,11 +20,16 @@
                 ['label' => '動作環境',           'value' => 'インターネット接続環境が必要です。推奨ブラウザ：Chrome / Firefox / Safari / Edge（各最新版）'],
             ] as $row)
                 <div class="flex border-b border-[#eef1f4] last:border-b-0">
-                    <div
-                        class="w-[200px] flex-none bg-[#f7fbfc] px-5 py-4 font-semibold text-[#4a5566] text-[14px] border-r border-[#eef1f4]">{{ $row['label'] }}</div>
+                    <div class="w-[200px] flex-none bg-[#f7fbfc] px-5 py-4 font-semibold text-[#4a5566] text-[14px] border-r border-[#eef1f4]">{{ $row['label'] }}</div>
                     <div class="flex-1 px-5 py-4 text-[#3d4757] leading-[1.8]">{{ $row['value'] }}</div>
                 </div>
             @endforeach
+            <div class="flex border-b border-[#eef1f4] last:border-b-0">
+                <div class="w-[200px] flex-none bg-[#f7fbfc] px-5 py-4 font-semibold text-[#4a5566] text-[14px] border-r border-[#eef1f4]">お問い合わせ</div>
+                <div class="flex-1 px-5 py-4 text-[#3d4757] leading-[1.8]">
+                    <a href="{{ route('contact.index') }}" class="text-[#1fa5c4] hover:underline">お問い合わせフォーム</a>
+                </div>
+            </div>
         </div>
     </div>
 </x-layout.app>
