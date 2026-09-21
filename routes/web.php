@@ -10,6 +10,7 @@ use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminAuthenticatedSessionController;
+use App\Http\Controllers\Admin\PointChargeController as AdminPointChargeController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SaleController as AdminSaleController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -77,7 +78,9 @@ Route::middleware('auth')->group(function () {
     // ポイントチャージ
     Route::controller(PointController::class)->prefix('point')->name('point.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/intent', 'createIntent')->name('intent');
         Route::post('/', 'store')->name('store');
+        Route::delete('/payment-methods/{paymentMethodId}', 'destroyPaymentMethod')->name('payment-methods.destroy');
     });
 });
 
@@ -108,6 +111,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // 売上管理
         Route::get('/sales', [AdminSaleController::class, 'index'])->name('sales.index');
+
+        // ポイントチャージ履歴
+        Route::get('/point-charges', [AdminPointChargeController::class, 'index'])->name('point-charges.index');
     });
 });
 

@@ -69,11 +69,9 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $user->carts()->delete();
-        auth()->logout();
-
         $user->delete();
 
-        $request->session()->invalidate();
+        auth('web')->logout();
         $request->session()->regenerateToken();
 
         return redirect()->route('top');

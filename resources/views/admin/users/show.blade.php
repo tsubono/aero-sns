@@ -42,6 +42,10 @@
                     <dt class="text-[11px] font-semibold text-[#7b8694] uppercase tracking-wide">登録日</dt>
                     <dd>{{ $user->created_at->format('Y/m/d H:i') }}</dd>
                 </div>
+                <div class="flex flex-col gap-1 sm:col-span-2">
+                    <dt class="text-[11px] font-semibold text-[#7b8694] uppercase tracking-wide">Stripe顧客ID</dt>
+                    <dd class="font-mono text-[12px]">{{ $user->stripe_customer_id ?? '—' }}</dd>
+                </div>
             </dl>
         </div>
 
@@ -135,60 +139,7 @@
         <div class="px-5 py-4 border-b border-[#eef1f4]">
             <h2 class="text-[14px] font-bold m-0">ポイントチャージ履歴</h2>
         </div>
-        <div class="overflow-x-auto">
-            <table class="w-full text-[13px]">
-                <thead>
-                    <tr class="bg-[#f7fbfc] border-b border-[#e2e6ea]">
-                        <th class="text-right px-4 py-3 font-semibold text-[#7b8694] w-28">付与ポイント</th>
-                        <th class="text-right px-4 py-3 font-semibold text-[#7b8694] w-28">決済金額</th>
-                        <th class="text-left px-4 py-3 font-semibold text-[#7b8694] w-28">決済方法</th>
-                        <th class="text-left px-4 py-3 font-semibold text-[#7b8694] w-24">ステータス</th>
-                        <th class="text-left px-4 py-3 font-semibold text-[#7b8694] w-36">チャージ日時</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($pointCharges as $charge)
-                        <tr class="border-b border-[#eef1f4] hover:bg-[#f9fafb] transition-colors duration-100">
-                            <td class="px-4 py-3 text-right font-bold text-[#1fa5c4]">+{{ number_format($charge->point) }} pt</td>
-                            <td class="px-4 py-3 text-right">¥{{ number_format($charge->amount) }}</td>
-                            <td class="px-4 py-3 text-[#7b8694]">{{ $charge->payment_method }}</td>
-                            <td class="px-4 py-3">
-                                @if($charge->status === \App\Enums\PointChargeStatus::Completed)
-                                    <span class="px-2 py-[3px] rounded-full text-[11px] font-bold bg-green-50 text-green-600 border border-green-200 whitespace-nowrap">{{ $charge->status->label() }}</span>
-                                @elseif($charge->status === \App\Enums\PointChargeStatus::Failed)
-                                    <span class="px-2 py-[3px] rounded-full text-[11px] font-bold bg-red-50 text-red-500 border border-red-200 whitespace-nowrap">{{ $charge->status->label() }}</span>
-                                @else
-                                    <span class="px-2 py-[3px] rounded-full text-[11px] font-bold bg-yellow-50 text-yellow-600 border border-yellow-200 whitespace-nowrap">{{ $charge->status->label() }}</span>
-                                @endif
-                            </td>
-                            <td class="px-4 py-3 text-[#7b8694] whitespace-nowrap">{{ $charge->charged_at ? $charge->charged_at->format('Y/m/d H:i') : '-' }}</td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="px-4 py-8 text-center text-[#7b8694]">チャージ履歴がありません。</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-
-        @if($pointCharges->hasPages())
-            <div class="flex items-center justify-between px-4 py-3 border-t border-[#eef1f4]">
-                <span class="text-[12px] text-[#7b8694]">全 {{ $pointCharges->total() }} 件中 {{ $pointCharges->firstItem() }}〜{{ $pointCharges->lastItem() }} 件</span>
-                <div class="flex items-center gap-1">
-                    @if($pointCharges->onFirstPage())
-                        <span class="px-3 py-1 rounded-[6px] border border-[#e2e6ea] text-[#c0c8d2] text-[12px]">前へ</span>
-                    @else
-                        <a href="{{ $pointCharges->previousPageUrl() }}" class="px-3 py-1 rounded-[6px] border border-[#d4dae1] text-[#4a5566] text-[12px] no-underline hover:bg-[#f2f5f7]">前へ</a>
-                    @endif
-                    @if($pointCharges->hasMorePages())
-                        <a href="{{ $pointCharges->nextPageUrl() }}" class="px-3 py-1 rounded-[6px] border border-[#d4dae1] text-[#4a5566] text-[12px] no-underline hover:bg-[#f2f5f7]">次へ</a>
-                    @else
-                        <span class="px-3 py-1 rounded-[6px] border border-[#e2e6ea] text-[#c0c8d2] text-[12px]">次へ</span>
-                    @endif
-                </div>
-            </div>
-        @endif
+        <x-admin.point-charge-table :point-charges="$pointCharges" />
     </div>
 
 </x-layout.admin-app>

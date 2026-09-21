@@ -104,13 +104,6 @@
             @endif
 
             <div class="mt-2 px-5 py-[18px] bg-white border border-[#e2e6ea] rounded-[12px] flex flex-col gap-3">
-                @if($product->file_type)
-                    <div class="flex justify-between text-[13px]">
-                        <span class="text-[#7b8694]">ファイル形式</span>
-                        <span class="text-[#1a1f27] font-medium">{{ $product->file_type }}</span>
-                    </div>
-                    <div class="h-px bg-[#eef1f4]"></div>
-                @endif
                 @if($product->category)
                     <div class="flex justify-between text-[13px]">
                         <span class="text-[#7b8694]">商品カテゴリ</span>
@@ -126,12 +119,6 @@
             <section>
                 <h2 class="text-[16px] font-bold m-0 mb-[18px] pb-[10px] border-b border-[#e2e6ea] flex items-center gap-[10px] tracking-[0.02em]"><span class="w-1 h-4 bg-[#1fa5c4] rounded-[2px] inline-block"></span>商品内容</h2>
                 <p class="text-[15px] leading-[2] text-[#3d4757] whitespace-pre-line m-0">{{ $product->description }}</p>
-            </section>
-        @endif
-        @if($product->contents)
-            <section>
-                <h2 class="text-[16px] font-bold m-0 mb-[18px] pb-[10px] border-b border-[#e2e6ea] flex items-center gap-[10px] tracking-[0.02em]"><span class="w-1 h-4 bg-[#1fa5c4] rounded-[2px] inline-block"></span>収録内容</h2>
-                <p class="text-[15px] leading-[2] text-[#3d4757] whitespace-pre-line m-0">{{ $product->contents }}</p>
             </section>
         @endif
     </div>

@@ -30,6 +30,10 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-8"/></svg>
                 売上管理
             </a>
+            <a href="{{ route('admin.point-charges.index') }}" class="flex items-center gap-3 px-3 py-[10px] rounded-[8px] text-[13px] font-semibold no-underline transition-colors duration-150 {{ request()->routeIs('admin.point-charges.*') ? 'bg-[#1fa5c4] text-white' : 'text-white/70 hover:bg-white/10 hover:text-white' }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                チャージ履歴
+            </a>
         </nav>
         <div class="px-3 pb-5 border-t border-white/10 pt-4">
             <span class="block text-[11px] text-white/40 px-3 mb-2">{{ auth('admin')->user()->name ?? '' }}</span>

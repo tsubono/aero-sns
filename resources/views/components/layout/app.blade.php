@@ -12,7 +12,6 @@
 </head>
 <body>
 <div class="font-sans bg-white text-[#1a1f27] min-h-screen flex flex-col">
-
     <header class="sticky top-0 z-20 flex items-center justify-between gap-6 py-[18px] px-8 bg-white/90 backdrop-blur-[10px] border-b border-[#e2e6ea] flex-wrap">
         <a href="{{ route('top') }}" class="text-[20px] font-extrabold tracking-[0.04em] text-[#1a1f27] no-underline">AERO <span class="text-[#1fa5c4]">SNS</span></a>
         <div class="flex items-center gap-[18px]">
@@ -20,9 +19,10 @@
                 <a href="#" id="user-menu-btn" onclick="toggleUserMenu(event)" class="text-[#4a5566] flex items-center" aria-label="マイページ">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg>
                 </a>
-                <div id="user-menu" class="hidden absolute top-8 right-0 bg-white border border-[#e2e6ea] rounded-[10px] p-[6px] flex flex-col min-w-[140px] shadow-[0_12px_28px_rgba(26,31,39,0.12)] z-30">
+                <div id="user-menu" class="hidden absolute top-8 right-0 bg-white border border-[#e2e6ea] rounded-[10px] p-[6px] flex flex-col min-w-[160px] shadow-[0_12px_28px_rgba(26,31,39,0.12)] z-30">
                     @auth
                         <a href="{{ route('mypage') }}" class="text-[#4a5566] no-underline text-[14px] px-3 py-[9px] rounded-[6px] hover:bg-[#f2f5f7]">マイページ</a>
+                        <a href="{{ route('point.index') }}" class="text-[#4a5566] no-underline text-[14px] px-3 py-[9px] rounded-[6px] hover:bg-[#f2f5f7]">ポイントチャージ</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="w-full text-left text-[#4a5566] text-[14px] px-3 py-[9px] rounded-[6px] bg-transparent border-0 cursor-pointer font-sans hover:bg-[#f2f5f7]">ログアウト</button>

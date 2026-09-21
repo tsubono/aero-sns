@@ -155,22 +155,5 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-5">
-        <label class="flex flex-col gap-[6px]">
-            <span class="text-[13px] font-semibold text-[#4a5566]">ファイル形式</span>
-            <input type="text" name="file_type" value="{{ old('file_type', $product->file_type ?? '') }}" placeholder="例: PNG / ZIP" class="aero-input">
-            @error('file_type')
-                <span class="text-[12px] text-red-500">{{ $message }}</span>
-            @enderror
-        </label>
-
-        <div class="flex flex-col gap-[6px]">
-            <span class="text-[13px] font-semibold text-[#4a5566]">収録内容</span>
-            <textarea name="contents" rows="3" placeholder="収録内容を入力" class="aero-input resize-y">{{ old('contents', $product->contents ?? '') }}</textarea>
-            @error('contents')
-                <span class="text-[12px] text-red-500">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
 
 </div>

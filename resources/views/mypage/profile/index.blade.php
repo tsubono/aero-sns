@@ -82,31 +82,22 @@
         </a>
         <button
             type="button"
-            onclick="document.getElementById('withdraw-modal').classList.remove('hidden')"
+            onclick="openModal('withdraw-modal')"
             class="text-[13px] text-[#9ba7b4] no-underline hover:text-red-400 transition-colors bg-transparent border-0 cursor-pointer font-sans p-0"
         >退会する</button>
     </div>
 </div>
 
-{{-- 退会確認モーダル --}}
-<div id="withdraw-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center px-4" style="background: rgba(0,0,0,0.45);">
-    <div class="bg-white rounded-[16px] w-full max-w-[400px] p-8 shadow-xl flex flex-col gap-5">
-        <div class="flex flex-col gap-2">
-            <h3 class="text-[18px] font-bold m-0 text-[#1a1f27]">退会の確認</h3>
-            <p class="text-[13px] text-[#7b8694] m-0 leading-relaxed">退会すると、アカウントおよびすべてのデータが削除されます。この操作は取り消せません。本当に退会しますか？</p>
+<x-confirm-modal id="withdraw-modal" title="退会の確認">
+    <p class="text-[13px] text-[#7b8694] m-0 leading-relaxed">退会すると、アカウントおよびすべてのデータが削除されます。この操作は取り消せません。本当に退会しますか？</p>
+    <form method="POST" action="{{ route('mypage.profile.destroy') }}">
+        @csrf
+        @method('DELETE')
+        <div class="flex flex-col gap-[10px]">
+            <button type="submit" class="w-full py-[13px] rounded-[10px] bg-red-500 text-white text-[14px] font-bold border-0 cursor-pointer font-sans transition-colors hover:bg-red-600">退会する</button>
+            <button type="button" onclick="closeModal('withdraw-modal')"
+                class="w-full py-[13px] rounded-[10px] border border-[#d4dae1] text-[#4a5566] text-[14px] font-semibold bg-white cursor-pointer font-sans transition-colors hover:bg-[#f2f5f7]">キャンセル</button>
         </div>
-        <form method="POST" action="{{ route('mypage.profile.destroy') }}">
-            @csrf
-            @method('DELETE')
-            <div class="flex flex-col gap-[10px]">
-                <button type="submit" class="w-full py-[13px] rounded-[10px] bg-red-500 text-white text-[14px] font-bold border-0 cursor-pointer font-sans transition-colors hover:bg-red-600">退会する</button>
-                <button
-                    type="button"
-                    onclick="document.getElementById('withdraw-modal').classList.add('hidden')"
-                    class="w-full py-[13px] rounded-[10px] border border-[#d4dae1] text-[#4a5566] text-[14px] font-semibold bg-white cursor-pointer font-sans transition-colors hover:bg-[#f2f5f7]"
-                >キャンセル</button>
-            </div>
-        </form>
-    </div>
-</div>
+    </form>
+</x-confirm-modal>
 </x-layout.app>

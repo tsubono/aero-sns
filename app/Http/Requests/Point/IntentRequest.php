@@ -4,7 +4,7 @@ namespace App\Http\Requests\Point;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class IntentRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,8 +17,6 @@ class StoreRequest extends FormRequest
 
         return [
             'plan_id' => ['required', 'integer', 'in:' . implode(',', $validPlanIds)],
-            'payment_intent_id' => ['required', 'string', 'regex:/^pi_/'],
         ];
     }
-
 }

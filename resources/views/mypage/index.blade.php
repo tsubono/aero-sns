@@ -8,6 +8,13 @@
 
     <h1 class="text-[21px] font-bold m-0 mb-[26px] flex items-center gap-[10px]"><span class="w-1 h-[18px] bg-[#1fa5c4] rounded-[2px] inline-block"></span>マイページ</h1>
 
+    @if(session('success'))
+        <div class="mb-6 px-4 py-3 rounded-[10px] bg-[rgba(43,158,120,0.08)] border border-[rgba(43,158,120,0.25)] text-[14px] text-[#2b9e78] font-semibold">{{ session('success') }}</div>
+    @endif
+    @if(session('error'))
+        <div class="mb-6 px-4 py-3 rounded-[10px] bg-[rgba(207,19,34,0.06)] border border-[rgba(207,19,34,0.2)] text-[14px] text-[#cf1322] font-semibold">{{ session('error') }}</div>
+    @endif
+
     <div class="flex items-center justify-between gap-5 px-[26px] py-6 rounded-[14px] bg-[#f2f9fb] border border-[#cfe8ef] mb-[34px] flex-wrap">
         <div class="flex flex-col gap-[6px]">
             <span class="text-[12px] font-semibold text-[#178ba6]">保有ポイント</span>
