@@ -21,18 +21,21 @@ class OrderController extends Controller
     /**
      * 注文確認
      *
-     * @return View
+     * @return View|RedirectResponse
      */
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
-        $cartItems = auth()->user()
-            ->carts()
-            ->with('product.category')
-            ->get();
+        $user = auth()->user();
+        $cartItems = $user->carts()->with('product.category')->get();
 
         $totalPoint = $cartItems->sum(fn($cartItem) => $cartItem->product->point * $cartItem->quantity);
+        $userPoint = $user->point;
+
+        if ($userPoint < $totalPoint) {
+            return redirect()->route('point.index')->with('error', 'ポイントが不足しています。ポイントをチャージしてから再度お試しください。');
+        }
+
         $totalQty = $cartItems->sum('quantity');
-        $userPoint = auth()->user()->point;
 
         return view('order.index', compact('cartItems', 'totalPoint', 'totalQty', 'userPoint'));
     }
@@ -57,7 +60,7 @@ class OrderController extends Controller
 
         // ポイントチェック
         if ($user->point < $totalPoint) {
-            return redirect()->route('order.index')->with('error', 'ポイントが不足しています。');
+            return redirect()->route('point.index')->with('error', 'ポイントが不足しています。ポイントをチャージしてから再度お試しください。');
         }
 
         // 在庫チェック
@@ -103,7 +106,7 @@ class OrderController extends Controller
 
         // ポイントチェック
         if ($user->point < $totalPoint) {
-            return redirect()->back()->with('error', 'ポイントが不足しています。');
+            return redirect()->route('point.index')->with('error', 'ポイントが不足しています。ポイントをチャージしてから再度お試しください。');
         }
 
         // 在庫チェック

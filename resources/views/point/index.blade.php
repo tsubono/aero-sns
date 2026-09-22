@@ -13,8 +13,10 @@
     @if(session('success'))
         <div class="mb-6 px-4 py-3 rounded-[10px] bg-[rgba(43,158,120,0.08)] border border-[rgba(43,158,120,0.25)] text-[14px] text-[#2b9e78] font-semibold">{{ session('success') }}</div>
     @endif
-    @if(session('error'))
-        <div class="mb-6 px-4 py-3 rounded-[10px] bg-[rgba(207,19,34,0.06)] border border-[rgba(207,19,34,0.2)] text-[14px] text-[#cf1322] font-semibold">{{ session('error') }}</div>
+    @if(session('error') || request()->has('insufficient'))
+        <div class="mb-6 px-4 py-3 rounded-[10px] bg-[rgba(207,19,34,0.06)] border border-[rgba(207,19,34,0.2)] text-[14px] text-[#cf1322] font-semibold">
+            {{ session('error') ?? 'ポイントが不足しています。ポイントをチャージしてから再度お試しください。' }}
+        </div>
     @endif
 
     <div class="flex items-center justify-between gap-5 px-[26px] py-5 rounded-[14px] bg-[#f2f9fb] border border-[#cfe8ef] mb-8">

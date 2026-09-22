@@ -165,6 +165,8 @@
 <script>
 var unitPrice = {{ $product->point }};
 var maxStock  = {{ $product->stock }};
+var userPoint = @auth {{ (int) auth()->user()->point }} @else null @endauth;
+var pointIndexUrl = "{{ route('point.index') }}";
 
 function changeQty(delta) {
     var input = document.getElementById('qty-input');
@@ -190,6 +192,10 @@ function closeBuyNowModal() {
 
 function submitBuyNow() {
     var qty = parseInt(document.getElementById('qty-input').value) || 1;
+    if (userPoint !== null && userPoint < unitPrice * qty) {
+        window.location.href = pointIndexUrl + '?insufficient=1';
+        return;
+    }
     document.getElementById('buy-now-quantity').value = qty;
     document.getElementById('buy-now-form').submit();
 }

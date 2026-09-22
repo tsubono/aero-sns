@@ -15,6 +15,12 @@
     <header class="sticky top-0 z-20 flex items-center justify-between gap-6 py-[18px] px-8 bg-white/90 backdrop-blur-[10px] border-b border-[#e2e6ea] flex-wrap">
         <a href="{{ route('top') }}" class="text-[20px] font-extrabold tracking-[0.04em] text-[#1a1f27] no-underline">AERO <span class="text-[#1fa5c4]">SNS</span></a>
         <div class="flex items-center gap-[18px]">
+            @if($userPoint !== null)
+                <a href="{{ route('point.index') }}" class="flex items-center gap-[5px] px-[10px] py-[5px] rounded-full bg-[rgba(31,165,196,0.1)] hover:bg-[rgba(31,165,196,0.18)] transition-colors duration-150 no-underline" aria-label="保有ポイント">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1fa5c4" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <span class="text-[13px] font-bold text-[#1fa5c4] leading-none">{{ number_format($userPoint) }}<span class="text-[11px] font-semibold"> pt</span></span>
+                </a>
+            @endif
             <div class="relative">
                 <a href="#" id="user-menu-btn" onclick="toggleUserMenu(event)" class="text-[#4a5566] flex items-center" aria-label="マイページ">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg>

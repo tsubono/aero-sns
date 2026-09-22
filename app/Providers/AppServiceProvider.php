@@ -15,8 +15,12 @@ class AppServiceProvider extends ServiceProvider
             $cartCount = auth()->check()
                 ? auth()->user()->carts()->count()
                 : 0;
+            $userPoint = auth()->check()
+                ? auth()->user()->point
+                : null;
 
             $view->with('cartCount', $cartCount);
+            $view->with('userPoint', $userPoint);
         });
     }
 }
