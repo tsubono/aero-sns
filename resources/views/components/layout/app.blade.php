@@ -17,7 +17,7 @@
         <div class="flex items-center gap-[18px]">
             @if($userPoint !== null)
                 <a href="{{ route('point.index') }}" class="flex items-center gap-[5px] px-[10px] py-[5px] rounded-full bg-[rgba(31,165,196,0.1)] hover:bg-[rgba(31,165,196,0.18)] transition-colors duration-150 no-underline" aria-label="保有ポイント">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1fa5c4" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#1fa5c4" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
                     <span class="text-[13px] font-bold text-[#1fa5c4] leading-none">{{ number_format($userPoint) }}<span class="text-[11px] font-semibold"> pt</span></span>
                 </a>
             @endif
