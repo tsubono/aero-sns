@@ -16,7 +16,7 @@
         <a href="{{ route('top') }}" class="text-[20px] font-extrabold tracking-[0.04em] text-[#1a1f27] no-underline">AERO <span class="text-[#1fa5c4]">SNS</span></a>
         <div class="flex items-center gap-[18px]">
             @if($userPoint !== null)
-                <a href="{{ route('point.index') }}" class="flex items-center gap-[6px] px-[13px] py-[7px] rounded-full bg-[rgba(31,165,196,0.1)] hover:bg-[rgba(31,165,196,0.18)] transition-colors duration-150 no-underline" aria-label="保有ポイント">
+                <a href="{{ route('point.index') }}" class="flex items-center gap-[6px] px-[13px] py-[7px] rounded-full bg-[rgba(31,165,196,0.1)] hover:bg-[rgba(31,165,196,0.18)] transition-colors duration-150 no-underline min-w-[90px] justify-center" aria-label="保有ポイント">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="#1fa5c4" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
                     <span class="text-[15px] font-bold text-[#1fa5c4] leading-none">{{ number_format($userPoint) }}<span class="text-[13px] font-semibold"> pt</span></span>
                 </a>
