@@ -57,13 +57,8 @@
                     ? $product->productAccounts->map(fn($a) => ['id' => $a->id, 'text' => $a->account_text, 'used' => $a->is_used])->values()->toArray()
                     : [])
             ),
-            addItem() {
-                this.items.push({ id: null, text: '', used: false });
-                this.$nextTick(() => {
-                    const inputs = this.$el.querySelectorAll('.account-text-input');
-                    inputs[inputs.length - 1]?.focus();
-                });
-            },
+            bulkText: '',
+            bulkErrors: [],
             removeItem(index) {
                 this.items.splice(index, 1);
             },
@@ -75,12 +70,51 @@
                 const l7 = ['ID','PW','メール','メールPW','電話','2FA','AuthToken'];
                 const labels = parts.length >= 7 ? l7 : l6;
                 return parts.map((v, i) => ({ label: labels[i] || ('項目'+(i+1)), value: v }));
+            },
+            bulkAdd() {
+                this.bulkErrors = [];
+                const lines = this.bulkText.split('\n').map(l => l.trim()).filter(l => l !== '');
+                if (lines.length === 0) return;
+                const validLines = [];
+                lines.forEach((line, i) => {
+                    const delim = line.includes('|') ? '|' : ':';
+                    const parts = line.split(delim);
+                    if (parts.length !== 6 && parts.length !== 7) {
+                        this.bulkErrors.push((i + 1) + '行目: 項目数が不正です(' + parts.length + '個) - ' + line);
+                    } else {
+                        validLines.push(line);
+                    }
+                });
+                validLines.forEach(line => {
+                    this.items.push({ id: null, text: line, used: false });
+                });
+                if (this.bulkErrors.length === 0) {
+                    this.bulkText = '';
+                }
             }
         }"
     >
         <div class="flex items-center justify-between">
             <span class="text-[13px] font-semibold text-[#4a5566]">アカウント情報</span>
-            <button type="button" @click="addItem()" class="text-[12px] font-semibold text-white bg-[#1fa5c4] border-0 px-3 py-[5px] rounded-[7px] cursor-pointer hover:bg-[#178ba6] transition-colors font-sans">+ 追加</button>
+        </div>
+
+        <div class="flex flex-col gap-[6px] bg-[#f9fafb] border border-[#e2e6ea] rounded-[8px] p-3">
+            <span class="text-[12px] font-semibold text-[#4a5566]">一括入力欄</span>
+            <textarea
+                x-model="bulkText"
+                rows="4"
+                placeholder="例: username1|password1|email1|email_password1|2fa1|auth_token1&#10;username2|password2|email2|email_password2|2fa2|auth_token2"
+                class="aero-input resize-y font-mono text-[12px]"
+            ></textarea>
+            <div class="flex items-center justify-between gap-3">
+                <span class="text-[11px] text-[#7b8694]">1行につき1アカウント。区切り文字は「|」または「:」、項目数は6個(ID/PW/メール/メールPW/2FA/AuthToken)または7個(+電話番号)。</span>
+                <button type="button" @click="bulkAdd()" class="flex-none text-[12px] font-semibold text-white bg-[#1fa5c4] border-0 px-3 py-[5px] rounded-[7px] cursor-pointer hover:bg-[#178ba6] transition-colors font-sans">一括追加</button>
+            </div>
+            <div x-show="bulkErrors.length > 0" class="flex flex-col gap-[2px]">
+                <template x-for="(err, ei) in bulkErrors" :key="ei">
+                    <span class="text-[11px] text-red-500" x-text="err"></span>
+                </template>
+            </div>
         </div>
 
         <div class="flex flex-col gap-[8px]" x-show="items.length > 0">
@@ -130,7 +164,7 @@
             </template>
         </div>
 
-        <p x-show="items.length === 0" class="text-[12px] text-[#7b8694]">「追加」ボタンでアカウント情報を入力できます。</p>
+        <p x-show="items.length === 0" class="text-[12px] text-[#7b8694]">上の「一括入力欄」からアカウント情報を追加できます。</p>
         <span class="text-[11px] text-[#7b8694]">使用済みのアカウントは編集・削除できません。在庫数 = 未使用アカウント数。</span>
         @error('account_texts')
             <span class="text-[12px] text-red-500">{{ $message }}</span>
